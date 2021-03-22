@@ -23,7 +23,8 @@ public class GradeStudent {
     }
 
     public static void begin() {
-        System.out.println("This program reads exam/homework scores and reports your overall course grade.");
+        System.out.println();
+        System.out.println("This program reads exam/homework scores \nand reports your overall course grade.");
     }
 
     public static int shiftPoint() {
@@ -31,7 +32,7 @@ public class GradeStudent {
         return input.nextInt();
     }
 
-    public static double termCal() {
+    public static double testScore() {
         // Weight
         System.out.print("Weight (0-100)? ");
         int weight = input.nextInt();
@@ -55,19 +56,19 @@ public class GradeStudent {
 
     public static void midterm () {
         System.out.println("Midterm: ");
-        midScore = termCal();
+        midScore = testScore();
     }
 
     public static void finalterm () {
         System.out.println("Final: ");
-        finalScore = termCal();
+        finalScore = testScore();
     }
 
     public static void homework () {
         System.out.println("Homework: ");
         System.out.print("Weight (0-100)? ");
         input.nextInt();
-
+        //assignment
         System.out.print("Number of assignments? ");
         int assignNumber = input.nextInt();
         int assignScore = 0;
@@ -79,17 +80,17 @@ public class GradeStudent {
         }
         assignScore = Math.min(assignScore, 150);
         assignMaxScore = Math.min(assignMaxScore, 150);
-
+        //attendance
         System.out.print("How many sections did you attend? ");
         int sectionAttended = input.nextInt();
         int sectionPoint = (sectionAttended>6) ? 30 : sectionAttended*5;
         System.out.println("Section points = " + sectionPoint + " / 30");
+        //total
         int homeworkPoints = assignScore + sectionPoint;
         int homeworkMaxPoints = assignMaxScore + 30;
         System.out.println("Total points = " + homeworkPoints + " / " + homeworkMaxPoints);
-
         homeworkScore = (double) homeworkPoints/homeworkMaxPoints*totalWeight;
-        System.out.println("Weighted score = "+ homeworkScore + " / " + totalWeight);
+        System.out.println("Weighted score = "+ formated.format(homeworkScore) + " / " + totalWeight);
     }
 
     public static void report() {
