@@ -45,11 +45,11 @@ public class GradeStudent {
         if (isShifted) {
             point += shiftPoint();
         }
-        point = (point > 100) ? 100 : point;
+        point = Math.min(point, 100);
         // Total
         System.out.println("Total points = " + point + " / 100");
-        double weightScore = (double) point/weight;
-        System.out.println("Weighted score = " + weightScore + " / " + weight);
+        double weightScore = (double) point/100 * weight;
+        System.out.println("Weighted score = " + formated.format(weightScore) + " / " + weight);
         return weightScore;
     }
 
@@ -65,7 +65,8 @@ public class GradeStudent {
 
     public static void homework () {
         System.out.println("Homework: ");
-        System.out.println("Weight = " + totalWeight);
+        System.out.print("Weight (0-100)? ");
+        input.nextInt();
 
         System.out.print("Number of assignments? ");
         int assignNumber = input.nextInt();
@@ -76,8 +77,8 @@ public class GradeStudent {
             assignScore += input.nextInt();
             assignMaxScore += input.nextInt();
         }
-        assignScore = (assignScore>150) ? 150 : assignScore;
-        assignMaxScore = (assignMaxScore>150) ? 150 : assignMaxScore;
+        assignScore = Math.min(assignScore, 150);
+        assignMaxScore = Math.min(assignMaxScore, 150);
 
         System.out.print("How many sections did you attend? ");
         int sectionAttended = input.nextInt();
@@ -94,6 +95,23 @@ public class GradeStudent {
     public static void report() {
         overall = homeworkScore + midScore + finalScore;
         System.out.println("Overall = " + formated.format(overall));
-
+        System.out.println("Your grade will be at least: 3.0");
+        System.out.print("Your grade: ");
+        if (overall < 60) {
+            System.out.println(0.0);
+            System.out.println("You need to review your learning attitude!");
+        } else if (overall < 74.99) {
+            System.out.println(0.7);
+            System.out.println("You have to learn again!");
+        } else if (overall < 84.99) {
+            System.out.println(2.0);
+            System.out.println("You need more improvement!");
+        } else if (overall < 93) {
+            System.out.println(3.0);
+            System.out.println("Good!");
+        } else {
+            System.out.println(4.0);
+            System.out.println("Excellent!");
+        }
     }
 }
